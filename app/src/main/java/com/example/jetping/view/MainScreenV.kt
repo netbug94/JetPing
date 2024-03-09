@@ -8,10 +8,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -46,17 +49,27 @@ fun MainScreenV(viewModel: JetPingViewModel = JetPingViewModel()) {
                     placeholder = { Text("Insert IP or Hostname") }
                 )
                 Button(modifier = Modifier.fillMaxSize().weight(2f), shape = RectangleShape,
-                    onClick = { /*TODO*/ }) {
+                    onClick = { viewModel.performPing() }) {
                     Text(text = "Ping")
                 }
             }
 // Result
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(8f)) {
+                val lazyColumnState = rememberLazyListState()
                 LazyColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp).padding(bottom = 6.dp)
                     .background(ErgoGray)
                     .padding(3.dp)
-                    .background(ErgoWhite)) {
-
+                    .background(ErgoWhite),
+                    state = lazyColumnState) {
+                    items(viewModel.pingResults) { result ->
+                        Text(text = result)
+                    }
+                }
+                LaunchedEffect(viewModel.pingResults) {
+                    val lastIndex = viewModel.pingResults.size - 1
+                    if (lastIndex >= 0) {
+                        lazyColumnState.animateScrollToItem(lastIndex)
+                    }
                 }
             }
         }
