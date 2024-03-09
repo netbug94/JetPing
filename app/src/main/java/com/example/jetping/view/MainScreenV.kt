@@ -42,10 +42,11 @@ fun MainScreenV() {
 // Input row
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(1f).padding(vertical = 12.dp)) {
                 Button(modifier = Modifier.fillMaxSize().weight(2f), shape = RectangleShape,
-                    onClick = { /*TODO*/ }) {
+                    onClick = { fieldValue = "" }) {
                     Text(text = "Clear")
                 }
-                TextField(modifier = Modifier.fillMaxSize().weight(5f), value = fieldValue, onValueChange = { newValue -> fieldValue = newValue })
+                TextField(modifier = Modifier.fillMaxSize().weight(5f), value = fieldValue, onValueChange = { newValue -> fieldValue = newValue },
+                    placeholder = { Text("Insert IP or Hostname") })
 
                 Button(modifier = Modifier.fillMaxSize().weight(2f), shape = RectangleShape,
                     onClick = { /*TODO*/ }) {
