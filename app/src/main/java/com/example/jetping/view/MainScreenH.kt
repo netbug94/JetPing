@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenL() {
+fun MainScreenH() {
     Box(modifier = Modifier.fillMaxSize()) {
 
     }

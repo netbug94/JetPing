@@ -26,8 +26,9 @@ import androidx.compose.ui.unit.dp
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenP() {
+fun MainScreenV() {
     var fieldValue by remember { mutableStateOf("") }
+
     Box(modifier = Modifier.fillMaxSize()) {
 // Container
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
@@ -52,11 +53,11 @@ fun MainScreenP() {
                 }
             }
 // Result
-            Row(horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(8f)) {
-                LazyColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp).padding(bottom = 6.dp).background(Color.Blue)) {
+            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(8f)) {
+                LazyColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp).padding(bottom = 6.dp)
+                    .background(Color.Black)
+                    .padding(3.dp)
+                    .background(Color.White)) {
 
                 }
             }

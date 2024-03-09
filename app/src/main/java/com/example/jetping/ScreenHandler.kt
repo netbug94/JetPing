@@ -3,8 +3,8 @@ package com.example.jetping
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
-import com.example.jetping.view.MainScreenL
-import com.example.jetping.view.MainScreenP
+import com.example.jetping.view.MainScreenH
+import com.example.jetping.view.MainScreenV
 
 @Composable
 fun ScreenHandler() {
@@ -12,8 +12,8 @@ fun ScreenHandler() {
     val flipScreen = screenConfig.orientation == Configuration.ORIENTATION_PORTRAIT
 
     if (flipScreen) {
-        MainScreenP()
+        MainScreenV()
     } else {
-        MainScreenL()
+        MainScreenH()
     }
 }
