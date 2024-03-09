@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             JetPingTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    MainScreen()
+                    ScreenHandler()
                 }
             }
         }
@@ -29,6 +29,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     JetPingTheme {
-        MainScreen()
+        ScreenHandler()
     }
 }
