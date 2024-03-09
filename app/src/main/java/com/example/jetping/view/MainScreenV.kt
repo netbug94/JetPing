@@ -8,9 +8,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -61,8 +62,11 @@ fun MainScreenV(viewModel: JetPingViewModel = JetPingViewModel()) {
                     .padding(3.dp)
                     .background(ErgoWhite),
                     state = lazyColumnState) {
-                    items(viewModel.pingResults) { result ->
+                    itemsIndexed(viewModel.pingResults) { index, result ->
                         Text(text = result)
+                        if (index < viewModel.pingResults.size - 1) {
+                            HorizontalDivider(thickness = 1.dp, color = ErgoGray)
+                        }
                     }
                 }
                 LaunchedEffect(viewModel.pingResults) {
