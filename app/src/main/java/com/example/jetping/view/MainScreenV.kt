@@ -12,24 +12,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetping.engine_logic.JetPingViewModel
+import com.example.jetping.ui.theme.ErgoGray
+import com.example.jetping.ui.theme.ErgoWhite
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenV() {
-    var fieldValue by remember { mutableStateOf("") }
+fun MainScreenV(viewModel: JetPingViewModel = JetPingViewModel()) {
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize().background(ErgoWhite)) {
 // Container
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 // Title
@@ -40,14 +37,14 @@ fun MainScreenV() {
                 Text(text = "JetPing", Modifier.scale(1.5f))
             }
 // Input row
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(1f).padding(vertical = 12.dp)) {
+            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(1f).padding(vertical = 12.dp, horizontal = 5.dp)) {
                 Button(modifier = Modifier.fillMaxSize().weight(2f), shape = RectangleShape,
-                    onClick = { fieldValue = "" }) {
+                    onClick = { viewModel.fieldValue = "" }) {
                     Text(text = "Clear")
                 }
-                TextField(modifier = Modifier.fillMaxSize().weight(5f), value = fieldValue, onValueChange = { newValue -> fieldValue = newValue },
-                    placeholder = { Text("Insert IP or Hostname") })
-
+                TextField(modifier = Modifier.fillMaxSize().weight(5f), value = viewModel.fieldValue, onValueChange = { newValue -> viewModel.fieldValue = newValue },
+                    placeholder = { Text("Insert IP or Hostname") }
+                )
                 Button(modifier = Modifier.fillMaxSize().weight(2f), shape = RectangleShape,
                     onClick = { /*TODO*/ }) {
                     Text(text = "Ping")
@@ -56,9 +53,9 @@ fun MainScreenV() {
 // Result
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().weight(8f)) {
                 LazyColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp).padding(bottom = 6.dp)
-                    .background(Color.Black)
+                    .background(ErgoGray)
                     .padding(3.dp)
-                    .background(Color.White)) {
+                    .background(ErgoWhite)) {
 
                 }
             }
