@@ -4,3 +4,5 @@
 
 ## JetPing
 </div>
+
+- [ ] JetPing is an app that can ping both IPs and hostnames
