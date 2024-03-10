@@ -30,7 +30,7 @@ import com.example.jetping.ui.theme.ErgoWhite
 @Composable
 fun MainScreenV(viewModel: JetPingViewModel = JetPingViewModel()) {
 
-    Box(modifier = Modifier.fillMaxSize().background(ErgoWhite)) {
+    Box(modifier = Modifier.fillMaxSize()) {
 // Container
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 // Title
