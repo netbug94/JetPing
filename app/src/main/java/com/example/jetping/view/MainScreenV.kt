@@ -30,7 +30,7 @@ import com.example.jetping.ui.theme.ErgoWhite
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenV(viewModel: JetPingViewModel = JetPingViewModel()) {
+fun MainScreen(viewModel: JetPingViewModel = JetPingViewModel()) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 // Container
