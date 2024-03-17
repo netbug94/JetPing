@@ -9,10 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.jetping.UIHandler.ScreenHandler
 import com.example.jetping.engine_logic.JetPingViewModel
 import com.example.jetping.ui.theme.JetPingTheme
-import com.example.jetping.view.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +20,7 @@ class MainActivity : ComponentActivity() {
             JetPingTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    val viewModel: JetPingViewModel = viewModel()
-                    MainScreen(viewModel)
+                    ScreenHandler()
                 }
             }
         }
@@ -33,6 +31,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview(viewModel: JetPingViewModel = JetPingViewModel()) {
     JetPingTheme {
-        MainScreen(viewModel)
+        ScreenHandler()
     }
 }

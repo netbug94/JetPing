@@ -31,7 +31,7 @@ import com.example.jetping.ui.theme.ErgoWhite
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenV() {
+fun MainScreenH() {
     val viewModel: JetPingViewModel = viewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -48,7 +48,7 @@ fun MainScreenV() {
 // Input row
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .fillMaxSize()
-                .weight(1f)
+                .weight(2f)
                 .padding(vertical = 12.dp, horizontal = 5.dp)) {
                 Button(modifier = Modifier
                     .fillMaxSize()
@@ -71,7 +71,7 @@ fun MainScreenV() {
 // Result
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .fillMaxSize()
-                .weight(8f)) {
+                .weight(6f)) {
                 val lazyColumnState = rememberLazyListState()
                 LazyColumn(modifier = Modifier
                     .fillMaxSize()

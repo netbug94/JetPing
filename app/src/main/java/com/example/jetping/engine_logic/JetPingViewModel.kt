@@ -40,4 +40,8 @@ class JetPingViewModel : ViewModel() {
         process.waitFor()
         output
     }
+    fun resetValues() {
+        fieldValue = ""
+        pingResults = listOf("")
+    }
 }
