@@ -1,4 +1,4 @@
-package com.example.jetping
+package com.example.jetping.engine_logic
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
