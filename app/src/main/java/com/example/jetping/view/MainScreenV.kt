@@ -102,7 +102,6 @@ fun MainScreenV() {
                 LazyColumn(modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 5.dp)
-                    .padding(bottom = 6.dp)
                     .background(MaterialTheme.colorScheme.primary)
                     .padding(3.dp)
                     .background(MaterialTheme.colorScheme.background),
