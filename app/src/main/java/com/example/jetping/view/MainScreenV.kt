@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,8 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetping.engine_logic.JetPingViewModel
-import com.example.jetping.ui.theme.ErgoGray
-import com.example.jetping.ui.theme.ErgoWhite
 
 @Preview(showBackground = true)
 @Composable
@@ -77,14 +76,14 @@ fun MainScreenV() {
                     .fillMaxSize()
                     .padding(horizontal = 5.dp)
                     .padding(bottom = 6.dp)
-                    .background(ErgoGray)
+                    .background(MaterialTheme.colorScheme.tertiary)
                     .padding(3.dp)
-                    .background(ErgoWhite),
+                    .background(MaterialTheme.colorScheme.background),
                     state = lazyColumnState) {
                     itemsIndexed(viewModel.pingResults) { index, result ->
-                        Text(text = result)
+                        Text(text = result, modifier = Modifier.padding(start = 8.dp, top = 6.dp))
                         if (index < viewModel.pingResults.size - 1) {
-                            HorizontalDivider(thickness = 1.dp, color = ErgoGray)
+                            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.tertiary)
                         }
                     }
                 }
