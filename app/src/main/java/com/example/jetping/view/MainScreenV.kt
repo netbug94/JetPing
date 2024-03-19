@@ -76,7 +76,7 @@ fun MainScreenV() {
                     .fillMaxSize()
                     .padding(horizontal = 5.dp)
                     .padding(bottom = 6.dp)
-                    .background(MaterialTheme.colorScheme.tertiary)
+                    .background(MaterialTheme.colorScheme.primary)
                     .padding(3.dp)
                     .background(MaterialTheme.colorScheme.background),
                     state = lazyColumnState) {
