@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
@@ -19,12 +21,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetping.engine_logic.JetPingViewModel
@@ -49,9 +55,20 @@ fun MainScreenV() {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
                 .fillMaxSize()
                 .weight(1f)
-                .padding(horizontal = 5.dp)
-                .padding(top = 12.dp)) {
-
+                .padding(horizontal = 5.dp) ) {
+// Loading bar container top
+                Row(horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(.2f)
+                ) {
+                    if (viewModel.isLoading) {
+                        LinearProgressIndicator(
+                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
+                    }
+                }
+// Input area and buttons
                 Row(horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxSize().weight(1f)) {
                     Button(modifier = Modifier
@@ -65,7 +82,12 @@ fun MainScreenV() {
                         .weight(5f),
                         value = viewModel.fieldValue,
                         onValueChange = { newValue -> viewModel.fieldValue = newValue },
-                        placeholder = { Text("Insert IP or Hostname") }
+                        placeholder = { Text("Insert IP or Hostname") },
+                        singleLine = true, // Ensure the TextField is single-line
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(
+                            onDone = { viewModel.performPing() }
+                        )
                     )
                     Button(modifier = Modifier
                         .fillMaxSize()
@@ -74,16 +96,18 @@ fun MainScreenV() {
                         Text(text = "Ping")
                     }
                 }
-// Loading bar container
+// Loading bar container bottom
                 Row(horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxSize()
-                        .weight(.2f)
-                ) {
-                    if (viewModel.isLoading) {
-                        LinearProgressIndicator(
-                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
+                        .weight(.2f)) {
+                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                        if (viewModel.isLoading) {
+                            LinearProgressIndicator(
+                                modifier = Modifier.fillMaxSize().padding(vertical = 5.dp)
+                            )
+                        }
                     }
                 }
             }
