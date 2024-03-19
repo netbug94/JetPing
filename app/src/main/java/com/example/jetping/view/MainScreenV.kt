@@ -21,16 +21,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetping.engine_logic.JetPingViewModel
@@ -56,18 +53,6 @@ fun MainScreenV() {
                 .fillMaxSize()
                 .weight(1f)
                 .padding(horizontal = 5.dp) ) {
-// Loading bar container top
-                Row(horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .weight(.2f)
-                ) {
-                    if (viewModel.isLoading) {
-                        LinearProgressIndicator(
-                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
-                    }
-                }
 // Input area and buttons
                 Row(horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxSize().weight(1f)) {
@@ -101,13 +86,11 @@ fun MainScreenV() {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxSize()
-                        .weight(.2f)) {
-                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        if (viewModel.isLoading) {
-                            LinearProgressIndicator(
-                                modifier = Modifier.fillMaxSize().padding(vertical = 5.dp)
-                            )
-                        }
+                        .weight(.25f)
+                ) {
+                    if (viewModel.isLoading) {
+                        LinearProgressIndicator(
+                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
                     }
                 }
             }
