@@ -14,9 +14,11 @@ import java.io.InputStreamReader
 class JetPingViewModel : ViewModel() {
     var fieldValue by mutableStateOf("")
     var pingResults by mutableStateOf(listOf<String>())
+    var isLoading by mutableStateOf(false)
 
     fun performPing() {
         viewModelScope.launch {
+            isLoading = true // Set loading to true before starting the operation
             val newResult = try {
                 val count = "5"
                 val packetSize = "64"
@@ -25,6 +27,8 @@ class JetPingViewModel : ViewModel() {
                 output
             } catch (e: Exception) {
                 "Ping failed: ${e.message}"
+            } finally {
+                isLoading = false // Set loading to false after the operation
             }
             pingResults = pingResults + newResult
         }

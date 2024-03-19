@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -45,29 +46,48 @@ fun MainScreenV() {
                 Text(text = "JetPing", Modifier.scale(1.5f))
             }
 // Input row
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
                 .fillMaxSize()
                 .weight(1f)
-                .padding(vertical = 12.dp, horizontal = 5.dp)) {
-                Button(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(2f), shape = RectangleShape,
-                    onClick = { viewModel.resetValues() }) {
-                    Text(text = "Clear")
+                .padding(horizontal = 5.dp)
+                .padding(top = 12.dp)) {
+
+                Row(horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize().weight(1f)) {
+                    Button(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f), shape = RectangleShape,
+                        onClick = { viewModel.resetValues() }) {
+                        Text(text = "Clear")
+                    }
+                    TextField(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(5f),
+                        value = viewModel.fieldValue,
+                        onValueChange = { newValue -> viewModel.fieldValue = newValue },
+                        placeholder = { Text("Insert IP or Hostname") }
+                    )
+                    Button(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f), shape = RectangleShape,
+                        onClick = { viewModel.performPing() }) {
+                        Text(text = "Ping")
+                    }
                 }
-                TextField(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(5f), value = viewModel.fieldValue, onValueChange = { newValue -> viewModel.fieldValue = newValue },
-                    placeholder = { Text("Insert IP or Hostname") }
-                )
-                Button(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(2f), shape = RectangleShape,
-                    onClick = { viewModel.performPing() }) {
-                    Text(text = "Ping")
+// Loading bar container
+                Row(horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(.2f)
+                ) {
+                    if (viewModel.isLoading) {
+                        LinearProgressIndicator(
+                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
+                    }
                 }
             }
-// Result
+// Result container
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .fillMaxSize()
                 .weight(8f)) {
