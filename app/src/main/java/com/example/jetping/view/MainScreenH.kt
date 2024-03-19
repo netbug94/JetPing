@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -38,49 +39,66 @@ fun MainScreenH() {
 
     Box(modifier = Modifier.fillMaxSize()) {
 // Container
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        Column(modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 // Title
             Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(1f)) {
+                    .weight(1.5f)) {
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = "JetPing", Modifier.scale(1.5f))
             }
 // Input row
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
                 .fillMaxSize()
                 .weight(2f)
-                .padding(vertical = 12.dp, horizontal = 5.dp)) {
-                Button(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(2f), shape = RectangleShape,
-                    onClick = { viewModel.resetValues() }) {
-                    Text(text = "Clear")
+                .padding(horizontal = 5.dp) ) {
+// Loading bar container bottom
+                Row(horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(.25f)
+                ) {
+                    if (viewModel.isLoading) {
+                        LinearProgressIndicator(
+                            modifier = Modifier.fillMaxSize().padding(vertical = 5.dp))
+                    }
                 }
-                TextField(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(5f),
-                    value = viewModel.fieldValue,
-                    onValueChange = { newValue -> viewModel.fieldValue = newValue },
-                    placeholder = { Text("Insert IP or Hostname") },
-                    singleLine = true, // Ensure the TextField is single-line
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(
-                        onDone = { viewModel.performPing() }
+// Input area and buttons
+                Row(horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize().weight(1f)) {
+                    Button(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f), shape = RectangleShape,
+                        onClick = { viewModel.resetValues() }) {
+                        Text(text = "Clear")
+                    }
+                    TextField(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(5f),
+                        value = viewModel.fieldValue,
+                        onValueChange = { newValue -> viewModel.fieldValue = newValue },
+                        placeholder = { Text("Insert IP or Hostname") },
+                        singleLine = true, // Ensure the TextField is single-line
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(
+                            onDone = { viewModel.performPing() }
+                        )
                     )
-                )
-                Button(modifier = Modifier
-                    .fillMaxSize()
-                    .weight(2f), shape = RectangleShape,
-                    onClick = { viewModel.performPing() }) {
-                    Text(text = "Ping")
+                    Button(modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f), shape = RectangleShape,
+                        onClick = { viewModel.performPing() }) {
+                        Text(text = "Ping")
+                    }
                 }
             }
-// Result
+// Result container
             Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .fillMaxSize()
-                .weight(6f)) {
+                .weight(7f)) {
                 val lazyColumnState = rememberLazyListState()
                 LazyColumn(modifier = Modifier
                     .fillMaxSize()
@@ -91,7 +109,7 @@ fun MainScreenH() {
                     .background(MaterialTheme.colorScheme.background),
                     state = lazyColumnState) {
                     itemsIndexed(viewModel.pingResults) { index, result ->
-                        Text(text = result)
+                        Text(text = result, modifier = Modifier.padding(start = 8.dp, top = 6.dp))
                         if (index < viewModel.pingResults.size - 1) {
                             HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.tertiary)
                         }
