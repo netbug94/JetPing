@@ -1,7 +1,8 @@
 <div align="center">
 
-### ![1477-capybara](https://github.com/hispanicdevian/libreNMS-Guide/assets/135581442/4296fa98-e024-4ed7-9d23-8f414f94b5c0) [olracnai](https://github.com/olracnai) | [JetPing](https://github.com/olracnai/JetPing) ![1477-capybara](https://github.com/hispanicdevian/libreNMS-Guide/assets/135581442/4296fa98-e024-4ed7-9d23-8f414f94b5c0)
+![gitjetPingImage](https://github.com/olracnai/JetPing/assets/135581442/761e014e-cd6e-4244-aa48-08b542ff66f2)
 
+[olracnai](https://github.com/olracnai) | [JetPing](https://github.com/olracnai/JetPing)
 ## JetPing
 </div>
 
